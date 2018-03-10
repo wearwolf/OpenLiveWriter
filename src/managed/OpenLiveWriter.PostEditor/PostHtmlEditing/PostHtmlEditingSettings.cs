@@ -110,21 +110,21 @@ namespace OpenLiveWriter.PostEditor.PostHtmlEditing
                     templateHtml = templateHtml.Replace(origPath, newUri);
                 }
 
-                /*Parse meta tags in order to set CSS3 compatibility*/
-                Regex metatag = new Regex(@"<(?i:meta)(\s)+(?i:http-equiv)(\s)*=""(?:X-UA-Compatible)""(\s)+(?i:content)(\s)*=""(?i:IE=edge)""(\s)*/>");
-                Match match = metatag.Match(templateHtml);
+                ///*Parse meta tags in order to set CSS3 compatibility*/
+                //Regex metatag = new Regex(@"<(?i:meta)(\s)+(?i:http-equiv)(\s)*=""(?:X-UA-Compatible)""(\s)+(?i:content)(\s)*=""(?i:IE=edge)""(\s)*/>");
+                //Match match = metatag.Match(templateHtml);
                 
-                if (!match.Success)
-                {
-                    // prepend the metatag to make css3 compatible at least on edge (Windows 8+)
-                    int i = templateHtml.IndexOf("<HEAD>", StringComparison.OrdinalIgnoreCase);
-                    if (i > 0)
-                    {                        
-                        templateHtml = ( templateHtml.Substring(0, i + 6) 
-                                        + "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />" 
-                                        + templateHtml.Substring(i + 6) );
-                    }
-                }
+                //if (!match.Success)
+                //{
+                //    // prepend the metatag to make css3 compatible at least on edge (Windows 8+)
+                //    int i = templateHtml.IndexOf("<HEAD>", StringComparison.OrdinalIgnoreCase);
+                //    if (i > 0)
+                //    {                        
+                //        templateHtml = ( templateHtml.Substring(0, i + 6) 
+                //                        + "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />" 
+                //                        + templateHtml.Substring(i + 6) );
+                //    }
+                //}
 
 
                 return templateHtml;
