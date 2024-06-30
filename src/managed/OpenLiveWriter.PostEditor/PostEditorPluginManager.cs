@@ -243,23 +243,22 @@ namespace OpenLiveWriter.PostEditor
                                 AddPluginsFromKey(assemblyPaths, legacyUserSettingsKey);
 
                 // HKLM (this may not work for limited users and/or on vista)
+                //try
+                //{
+                //    if (ApplicationEnvironment.MachineSettingsRoot.HasSubSettings(PLUGIN_ASSEMBLIES))
+                //        using (SettingsPersisterHelper machineSettingsKey = ApplicationEnvironment.MachineSettingsRoot.GetSubSettings(PLUGIN_ASSEMBLIES))
+                //            AddPluginsFromKey(assemblyPaths, machineSettingsKey);
 
-                try
-                {
-                    if (ApplicationEnvironment.MachineSettingsRoot.HasSubSettings(PLUGIN_ASSEMBLIES))
-                        using (SettingsPersisterHelper machineSettingsKey = ApplicationEnvironment.MachineSettingsRoot.GetSubSettings(PLUGIN_ASSEMBLIES))
-                            AddPluginsFromKey(assemblyPaths, machineSettingsKey);
-
-                    if (_pluginsKey != PLUGIN_LEGACY_KEY)
-                        using (RegistryKey legacyKey = Registry.LocalMachine.OpenSubKey(PLUGIN_LEGACY_KEY))
-                            if (legacyKey != null) // Don't create the key if it doesn't already exist
-                                using (SettingsPersisterHelper legacyUserSettingsKey = new SettingsPersisterHelper(new RegistrySettingsPersister(Registry.LocalMachine, PLUGIN_LEGACY_KEY)))
-                                    AddPluginsFromKey(assemblyPaths, legacyUserSettingsKey);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Error occurred while attempting to read HKLM for PluginAssemblies: " + ex.ToString());
-                }
+                //    if (_pluginsKey != PLUGIN_LEGACY_KEY)
+                //        using (RegistryKey legacyKey = Registry.LocalMachine.OpenSubKey(PLUGIN_LEGACY_KEY))
+                //            if (legacyKey != null) // Don't create the key if it doesn't already exist
+                //                using (SettingsPersisterHelper legacyUserSettingsKey = new SettingsPersisterHelper(new RegistrySettingsPersister(Registry.LocalMachine, PLUGIN_LEGACY_KEY)))
+                //                    AddPluginsFromKey(assemblyPaths, legacyUserSettingsKey);
+                //}
+                //catch (Exception ex)
+                //{
+                //    Debug.WriteLine("Error occurred while attempting to read HKLM for PluginAssemblies: " + ex.ToString());
+                //}
 
                 // load them
                 foreach (string assemblyPath in assemblyPaths)
