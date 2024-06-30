@@ -12,6 +12,7 @@ using OpenLiveWriter.Controls;
 using OpenLiveWriter.HtmlEditor;
 using OpenLiveWriter.Mshtml;
 using mshtml;
+using System.Linq;
 
 namespace OpenLiveWriter.PostEditor.Tables
 {
@@ -520,6 +521,7 @@ namespace OpenLiveWriter.PostEditor.Tables
                 rowProperties.CellProperties.BackgroundColor = GetBackgroundColorForRow(row);
                 rowProperties.CellProperties.HorizontalAlignment = GetAlignmentForRow(row);
                 rowProperties.CellProperties.VerticalAlignment = GetVAlignmentForRow(row);
+                rowProperties.CellProperties.IsHeader = GetHeaderCellForRow(row);
 
                 return rowProperties;
             }
@@ -579,6 +581,25 @@ namespace OpenLiveWriter.PostEditor.Tables
                             else
                             {
                                 (cell as IHTMLElement).removeAttribute("valign", 0);
+                            }
+                        }
+
+                        if (value.CellProperties.IsHeader.HasValue)
+                        {
+                            var element = (cell as IHTMLElement);
+                            if (value.CellProperties.IsHeader.Value)
+                            {
+                                if (element.tagName == "TD")
+                                {
+                                    HTMLElementHelper.SwitchElementTag(element, "TH");
+                                }
+                            }
+                            else
+                            {
+                                if (element.tagName == "TH")
+                                {
+                                    HTMLElementHelper.SwitchElementTag(element, "TD");
+                                }
                             }
                         }
                     }
@@ -699,6 +720,7 @@ namespace OpenLiveWriter.PostEditor.Tables
                 columnProperties.CellProperties.BackgroundColor = tableColumn.BackgroundColor;
                 columnProperties.CellProperties.HorizontalAlignment = tableColumn.HorizontalAlignment;
                 columnProperties.CellProperties.VerticalAlignment = tableColumn.VerticalAlignment;
+                columnProperties.CellProperties.IsHeader = tableColumn.IsHeader;
                 return columnProperties;
             }
             set
@@ -710,6 +732,7 @@ namespace OpenLiveWriter.PostEditor.Tables
                     tableColumn.BackgroundColor = value.CellProperties.BackgroundColor;
                     tableColumn.HorizontalAlignment = value.CellProperties.HorizontalAlignment;
                     tableColumn.VerticalAlignment = value.CellProperties.VerticalAlignment;
+                    tableColumn.IsHeader = value.CellProperties.IsHeader;
 
                     TableHelper.SynchronizeCellAndTableWidthsForEditing(TableSelection.Table);
 
@@ -873,6 +896,7 @@ namespace OpenLiveWriter.PostEditor.Tables
                 cellProperties.BackgroundColor = new CellColor(TableHelper.GetColorForHtmlColor(TableSelection.BeginCell.bgColor));
                 cellProperties.HorizontalAlignment = TableHelper.GetAlignmentForHtmlAlignment(TableSelection.BeginCell.align);
                 cellProperties.VerticalAlignment = TableHelper.GetVAlignmentForHtmlAlignment(TableSelection.BeginCell.vAlign);
+                cellProperties.IsHeader = TableHelper.GetIsHeaderCell(TableSelection.EndCell as IHTMLElement);
                 return cellProperties;
             }
             set
@@ -912,6 +936,25 @@ namespace OpenLiveWriter.PostEditor.Tables
                         else
                         {
                             (TableSelection.BeginCell as IHTMLElement).removeAttribute("valign", 0);
+                        }
+                    }
+
+                    if(value.IsHeader.HasValue)
+                    {
+                        var element = (TableSelection.BeginCell as IHTMLElement);
+                        if (value.IsHeader.Value)
+                        {
+                            if(element.tagName == "TD")
+                            {
+                                HTMLElementHelper.SwitchElementTag(element, "TH");
+                            }
+                        }
+                        else
+                        {
+                            if (element.tagName == "TH")
+                            {
+                                HTMLElementHelper.SwitchElementTag(element, "TD");
+                            }
                         }
                     }
 
@@ -1224,6 +1267,34 @@ namespace OpenLiveWriter.PostEditor.Tables
             return verticalAlignment;
         }
 
+        private bool? GetHeaderCellForRow(IHTMLTableRow row)
+        {
+            bool? headerCell = false;
+            bool firstCellProcessed = false;
+
+            foreach (IHTMLElement cell in row.cells.OfType<IHTMLElement>())
+            {
+                // for the first cell processed, note its tag
+                if (!firstCellProcessed)
+                {
+                    headerCell = TableHelper.GetIsHeaderCell(cell);
+                    firstCellProcessed = true;
+                }
+                // for subsequent cells, if any of them differ from the first cell
+                // then the tags are mixed
+                else
+                {
+                    if (headerCell != TableHelper.GetIsHeaderCell(cell))
+                    {
+                        headerCell = null;
+                        break;
+                    }
+                }
+            }
+
+            return headerCell;
+        }
+
         private bool TableParentElementFilter(IHTMLElement e)
         {
             if (ElementFilters.BLOCK_ELEMENTS(e))
@@ -1370,6 +1441,13 @@ namespace OpenLiveWriter.PostEditor.Tables
             set { _verticalAlignment = value; }
         }
         private VerticalAlignment _verticalAlignment = VerticalAlignment.Middle;
+
+        public bool? IsHeader
+        {
+            get { return _header; }
+            set { _header = value; }
+        }
+        private bool? _header = false;
     }
 
     public class RowProperties

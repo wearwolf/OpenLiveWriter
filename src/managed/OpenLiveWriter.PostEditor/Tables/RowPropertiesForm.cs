@@ -44,6 +44,7 @@ namespace OpenLiveWriter.PostEditor.Tables
             this.radioButtonFixedHeight.Text = Res.Get(StringId.RowPropertiesFixedHeight);
             this.radioButtonSizeToContent.Text = Res.Get(StringId.RowPropertiesSizeToContent);
             this.Text = Res.Get(StringId.RowPropertiesTitle);
+            this.cellPropertiesControl.IsHeaderCheckBoxThreeState = true;
 
             RowHeight = rowProperties.Height;
             cellPropertiesControl.CellProperties = rowProperties.CellProperties;
@@ -193,6 +194,7 @@ namespace OpenLiveWriter.PostEditor.Tables
         /// </summary>
         private void InitializeComponent()
         {
+            OpenLiveWriter.PostEditor.Tables.CellProperties cellProperties1 = new OpenLiveWriter.PostEditor.Tables.CellProperties();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBoxHeight = new System.Windows.Forms.GroupBox();
@@ -203,106 +205,111 @@ namespace OpenLiveWriter.PostEditor.Tables
             this.cellPropertiesControl = new OpenLiveWriter.PostEditor.Tables.CellPropertiesControl();
             this.groupBoxHeight.SuspendLayout();
             this.SuspendLayout();
-            //
+            // 
             // buttonOK
-            //
+            // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.buttonOK.Location = new System.Drawing.Point(97, 240);
+            this.buttonOK.Location = new System.Drawing.Point(147, 294);
             this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(90, 27);
             this.buttonOK.TabIndex = 2;
             this.buttonOK.Text = "OK";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            //
+            // 
             // buttonCancel
-            //
+            // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.buttonCancel.Location = new System.Drawing.Point(178, 240);
+            this.buttonCancel.Location = new System.Drawing.Point(245, 294);
             this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(90, 27);
             this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "Cancel";
-            //
+            // 
             // groupBoxHeight
-            //
+            // 
             this.groupBoxHeight.Controls.Add(this.labelPixels);
             this.groupBoxHeight.Controls.Add(this.textBoxHeight);
             this.groupBoxHeight.Controls.Add(this.radioButtonFixedHeight);
             this.groupBoxHeight.Controls.Add(this.radioButtonSizeToContent);
             this.groupBoxHeight.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.groupBoxHeight.Location = new System.Drawing.Point(9, 9);
+            this.groupBoxHeight.Location = new System.Drawing.Point(11, 10);
             this.groupBoxHeight.Name = "groupBoxHeight";
-            this.groupBoxHeight.Size = new System.Drawing.Size(243, 119);
+            this.groupBoxHeight.Size = new System.Drawing.Size(323, 136);
             this.groupBoxHeight.TabIndex = 0;
             this.groupBoxHeight.TabStop = false;
             this.groupBoxHeight.Text = "Height";
-            //
+            // 
             // labelPixels
-            //
+            // 
             this.labelPixels.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.labelPixels.Location = new System.Drawing.Point(105, 87);
+            this.labelPixels.Location = new System.Drawing.Point(126, 99);
             this.labelPixels.Name = "labelPixels";
-            this.labelPixels.Size = new System.Drawing.Size(120, 15);
+            this.labelPixels.Size = new System.Drawing.Size(144, 18);
             this.labelPixels.TabIndex = 3;
             this.labelPixels.Text = "pixels";
-            //
+            // 
             // textBoxHeight
-            //
-            this.textBoxHeight.Location = new System.Drawing.Point(50, 84);
+            // 
+            this.textBoxHeight.Location = new System.Drawing.Point(60, 96);
             this.textBoxHeight.MaxLength = 9;
             this.textBoxHeight.Name = "textBoxHeight";
-            this.textBoxHeight.Size = new System.Drawing.Size(46, 21);
+            this.textBoxHeight.Size = new System.Drawing.Size(55, 23);
             this.textBoxHeight.TabIndex = 2;
-            this.textBoxHeight.Text = "";
-            //
+            // 
             // radioButtonFixedHeight
-            //
-            this.radioButtonFixedHeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            this.radioButtonFixedHeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButtonFixedHeight.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.radioButtonFixedHeight.Location = new System.Drawing.Point(15, 57);
+            this.radioButtonFixedHeight.Location = new System.Drawing.Point(18, 65);
             this.radioButtonFixedHeight.Name = "radioButtonFixedHeight";
-            this.radioButtonFixedHeight.Size = new System.Drawing.Size(216, 24);
+            this.radioButtonFixedHeight.Size = new System.Drawing.Size(291, 28);
             this.radioButtonFixedHeight.TabIndex = 1;
             this.radioButtonFixedHeight.Text = "&Fixed height:";
             this.radioButtonFixedHeight.CheckedChanged += new System.EventHandler(this.radioButtonFixedHeight_CheckedChanged);
-            //
+            // 
             // radioButtonSizeToContent
-            //
-            this.radioButtonSizeToContent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            this.radioButtonSizeToContent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButtonSizeToContent.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.radioButtonSizeToContent.Location = new System.Drawing.Point(15, 25);
+            this.radioButtonSizeToContent.Location = new System.Drawing.Point(18, 29);
             this.radioButtonSizeToContent.Name = "radioButtonSizeToContent";
-            this.radioButtonSizeToContent.Size = new System.Drawing.Size(212, 24);
+            this.radioButtonSizeToContent.Size = new System.Drawing.Size(286, 27);
             this.radioButtonSizeToContent.TabIndex = 0;
             this.radioButtonSizeToContent.Text = "&Automatically size to content";
             this.radioButtonSizeToContent.CheckedChanged += new System.EventHandler(this.radioButtonSizeToContent_CheckedChanged);
-            //
+            // 
             // cellPropertiesControl
-            //
-            this.cellPropertiesControl.Location = new System.Drawing.Point(9, 132);
+            // 
+            cellProperties1.BackgroundColor = null;
+            cellProperties1.HorizontalAlignment = OpenLiveWriter.PostEditor.Tables.HorizontalAlignment.Left;
+            cellProperties1.IsHeader = false;
+            cellProperties1.VerticalAlignment = OpenLiveWriter.PostEditor.Tables.VerticalAlignment.Middle;
+            this.cellPropertiesControl.CellProperties = cellProperties1;
+            this.cellPropertiesControl.Location = new System.Drawing.Point(11, 151);
             this.cellPropertiesControl.Name = "cellPropertiesControl";
-            this.cellPropertiesControl.Size = new System.Drawing.Size(243, 98);
+            this.cellPropertiesControl.Size = new System.Drawing.Size(323, 143);
             this.cellPropertiesControl.TabIndex = 1;
-            //
+            // 
             // RowPropertiesForm
-            //
+            // 
             this.AcceptButton = this.buttonOK;
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 14);
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(262, 271);
+            this.ClientSize = new System.Drawing.Size(345, 330);
             this.Controls.Add(this.cellPropertiesControl);
             this.Controls.Add(this.groupBoxHeight);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
-            this.Location = new System.Drawing.Point(0, 0);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RowPropertiesForm";
             this.Text = "Row Properties";
             this.groupBoxHeight.ResumeLayout(false);
+            this.groupBoxHeight.PerformLayout();
             this.ResumeLayout(false);
 
         }

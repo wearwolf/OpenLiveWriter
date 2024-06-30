@@ -23,6 +23,7 @@ namespace OpenLiveWriter.PostEditor.Tables
             this.buttonCancel.Text = Res.Get(StringId.CancelButton);
             this.cellPropertiesControl.Text = Res.Get(StringId.Cells);
             this.Text = Res.Get(StringId.CellPropertiesTitle);
+            this.cellPropertiesControl.IsHeaderCheckBoxThreeState = false;
 
             cellPropertiesControl.CellProperties = cellProperties;
         }

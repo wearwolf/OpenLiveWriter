@@ -488,6 +488,17 @@ namespace OpenLiveWriter.CoreServices
             sourceNode.swapNode(destinationNode);
         }
 
+        static public void SwitchElementTag(IHTMLElement element, string newTag)
+        {
+            var newElement = AddNewElementToContainer(newTag, (IHTMLDocument2)element.document, element.parentElement);
+
+            CopyAttributes(element, newElement);
+            newElement.innerText = element.innerText;
+
+            SwapElements(newElement, element);
+            RemoveElement(element);
+        }
+
         /// <summary>
         /// Get the top of the element relative to the window client area
         /// </summary>

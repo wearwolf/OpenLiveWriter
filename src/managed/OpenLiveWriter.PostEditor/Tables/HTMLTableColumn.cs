@@ -90,6 +90,20 @@ namespace OpenLiveWriter.PostEditor.Tables
             }
         }
 
+        public bool? IsHeader
+        {
+            get
+            {
+                var isHeaderReader = new CellISHeaderReader();
+                ProcessColumnCells(isHeaderReader);
+                return isHeaderReader.IsHeaderCell;
+            }
+            set
+            {
+                ProcessColumnCells(new CellIsHeaderWriter(value));
+            }
+        }
+
         private class CellBackgroundColorReader : IColumnCellProcessor
         {
             bool _firstCellProcessed = false;
@@ -185,6 +199,40 @@ namespace OpenLiveWriter.PostEditor.Tables
             }
         }
 
+        private class CellISHeaderReader : IColumnCellProcessor
+        {
+            bool _firstCellProcessed = false;
+            private bool? _isHeaderCell;
+
+            public void ProcessCell(IHTMLTableCell cell)
+            {
+                var element = cell as IHTMLElement;
+                if (element == null) return;
+
+                // for the first cell processed, note its alignment
+                if (!_firstCellProcessed)
+                {
+                    _isHeaderCell = TableHelper.GetIsHeaderCell(element);
+                    _firstCellProcessed = true;
+                }
+                // for subsequent cells, if any of them differ from the first cell
+                // then the alignment is mixed
+                else if (_isHeaderCell != null) // optimize
+                {
+                    if (_isHeaderCell != TableHelper.GetIsHeaderCell(element))
+                        _isHeaderCell = null;
+                }
+            }
+
+            public bool? IsHeaderCell
+            {
+                get
+                {
+                    return _isHeaderCell;
+                }
+            }
+        }
+
         private class CellBackgroundColorWriter : IColumnCellProcessor
         {
             private CellColor _backgroundColor;
@@ -239,6 +287,36 @@ namespace OpenLiveWriter.PostEditor.Tables
                         cell.vAlign = TableHelper.GetHtmlAlignmentForVAlignment(_alignment);
                     else
                         (cell as IHTMLElement).removeAttribute("valign", 0);
+                }
+            }
+        }
+
+
+        private class CellIsHeaderWriter : IColumnCellProcessor
+        {
+            private bool? _isHeader;
+            public CellIsHeaderWriter(bool? isHeader) { _isHeader = isHeader; }
+
+            public void ProcessCell(IHTMLTableCell cell)
+            {
+                // mixed means leave the cells alone
+                if (_isHeader.HasValue)
+                {
+                    var element = cell as IHTMLElement;
+                    if (_isHeader.Value)
+                    {
+                        if (element.tagName == "TD")
+                        {
+                            HTMLElementHelper.SwitchElementTag(element, "TH");
+                        }
+                    }
+                    else
+                    {
+                        if (element.tagName == "TH")
+                        {
+                            HTMLElementHelper.SwitchElementTag(element, "TD");
+                        }
+                    }
                 }
             }
         }
