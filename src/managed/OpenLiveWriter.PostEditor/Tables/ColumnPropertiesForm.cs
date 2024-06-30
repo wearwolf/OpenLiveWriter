@@ -23,6 +23,7 @@ namespace OpenLiveWriter.PostEditor.Tables
             this.groupBoxSize.Text = Res.Get(StringId.Size);
             this.buttonOK.Text = Res.Get(StringId.OKButtonText);
             this.Text = Res.Get(StringId.ColumnProperties);
+            this.cellPropertiesControl.IsHeaderCheckBoxThreeState = true;
 
             columnWidthControl.ColumnWidth = columnProperties.Width;
             cellPropertiesControl.CellProperties = columnProperties.CellProperties;

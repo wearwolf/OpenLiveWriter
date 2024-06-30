@@ -40,6 +40,7 @@ namespace OpenLiveWriter.PostEditor.Tables
         private void InitializeComponent()
         {
             this.groupBoxCells = new System.Windows.Forms.GroupBox();
+            this.checkBoxIsHeader = new System.Windows.Forms.CheckBox();
             this.verticalAlignmentControl = new OpenLiveWriter.PostEditor.Tables.VerticalAlignmentControl();
             this.horizontalAlignmentControl = new OpenLiveWriter.PostEditor.Tables.HorizontalAlignmentControl();
             this.groupBoxCells.SuspendLayout();
@@ -51,15 +52,26 @@ namespace OpenLiveWriter.PostEditor.Tables
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxCells.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBoxCells.Controls.Add(this.checkBoxIsHeader);
             this.groupBoxCells.Controls.Add(this.verticalAlignmentControl);
             this.groupBoxCells.Controls.Add(this.horizontalAlignmentControl);
             this.groupBoxCells.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.groupBoxCells.Location = new System.Drawing.Point(0, 0);
             this.groupBoxCells.Name = "groupBoxCells";
-            this.groupBoxCells.Size = new System.Drawing.Size(233, 108);
+            this.groupBoxCells.Size = new System.Drawing.Size(233, 128);
             this.groupBoxCells.TabIndex = 2;
             this.groupBoxCells.TabStop = false;
             this.groupBoxCells.Text = "Cells";
+            // 
+            // checkBoxIsHeader
+            // 
+            this.checkBoxIsHeader.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.checkBoxIsHeader.Location = new System.Drawing.Point(15, 94);
+            this.checkBoxIsHeader.Name = "checkBoxIsHeader";
+            this.checkBoxIsHeader.Size = new System.Drawing.Size(141, 24);
+            this.checkBoxIsHeader.TabIndex = 2;
+            this.checkBoxIsHeader.Text = "Hea&der";
+            this.checkBoxIsHeader.ThreeState = true;
             // 
             // verticalAlignmentControl
             // 
@@ -85,11 +97,13 @@ namespace OpenLiveWriter.PostEditor.Tables
             // 
             this.Controls.Add(this.groupBoxCells);
             this.Name = "CellPropertiesControl";
-            this.Size = new System.Drawing.Size(239, 108);
+            this.Size = new System.Drawing.Size(239, 143);
             this.groupBoxCells.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
         #endregion
+
+        private System.Windows.Forms.CheckBox checkBoxIsHeader;
     }
 }

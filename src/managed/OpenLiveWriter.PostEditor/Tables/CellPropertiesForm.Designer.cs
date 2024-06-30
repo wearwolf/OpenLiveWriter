@@ -68,11 +68,12 @@ namespace OpenLiveWriter.PostEditor.Tables
             // 
             cellProperties1.BackgroundColor = null;
             cellProperties1.HorizontalAlignment = OpenLiveWriter.PostEditor.Tables.HorizontalAlignment.Left;
+            cellProperties1.IsHeader = false;
             cellProperties1.VerticalAlignment = OpenLiveWriter.PostEditor.Tables.VerticalAlignment.Middle;
             this.cellPropertiesControl.CellProperties = cellProperties1;
             this.cellPropertiesControl.Location = new System.Drawing.Point(13, 11);
             this.cellPropertiesControl.Name = "cellPropertiesControl";
-            this.cellPropertiesControl.Size = new System.Drawing.Size(323, 139);
+            this.cellPropertiesControl.Size = new System.Drawing.Size(323, 143);
             this.cellPropertiesControl.TabIndex = 4;
             // 
             // CellPropertiesForm
@@ -83,7 +84,7 @@ namespace OpenLiveWriter.PostEditor.Tables
             this.Controls.Add(this.cellPropertiesControl);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CellPropertiesForm";

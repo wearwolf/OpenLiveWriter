@@ -488,6 +488,17 @@ namespace OpenLiveWriter.CoreServices
             sourceNode.swapNode(destinationNode);
         }
 
+        static public void SwitchElementTag(IHTMLElement element, string newTag)
+        {
+            var newElement = AddNewElementToContainer(newTag, (IHTMLDocument2)element.document, element.parentElement);
+
+            CopyAttributes(element, newElement);
+            newElement.innerText = element.innerText;
+
+            SwapElements(newElement, element);
+            RemoveElement(element);
+        }
+
         /// <summary>
         /// Get the top of the element relative to the window client area
         /// </summary>
@@ -909,19 +920,19 @@ namespace OpenLiveWriter.CoreServices
                 }
 
                 // CSS3 RELATIVE SIZE TO ROOT HTML
-                i = cssUnits.IndexOf("REM", StringComparison.OrdinalIgnoreCase);
-                if (i > 0)
-                {
-                    float rootMultiplier = (float)Convert.ToDouble(cssUnits.Substring(0, i), CultureInfo.InstalledUICulture);
-                    IHTMLElement rootElement = element;
-                    while (rootElement.parentElement != null) // until it encounters {mshtml.HTMLHtmlElementClass} which is the root HTML node
-                    {
-                        rootElement = rootElement.parentElement;
-                    }
+                //i = cssUnits.IndexOf("REM", StringComparison.OrdinalIgnoreCase);
+                //if (i > 0)
+                //{
+                //    float rootMultiplier = (float)Convert.ToDouble(cssUnits.Substring(0, i), CultureInfo.InstalledUICulture);
+                //    IHTMLElement rootElement = element;
+                //    while (rootElement.parentElement != null) // until it encounters {mshtml.HTMLHtmlElementClass} which is the root HTML node
+                //    {
+                //        rootElement = rootElement.parentElement;
+                //    }
                     
-                    // the 'rem' unit is relative to the computed value of the font-size attribute of the root element.
-                    return rootMultiplier * CSSUnitStringToPointSize(CSSUnitStringFontSize, rootElement, LastChanceFontPointSize, vertical);
-                }
+                //    // the 'rem' unit is relative to the computed value of the font-size attribute of the root element.
+                //    return rootMultiplier * CSSUnitStringToPointSize(CSSUnitStringFontSize, rootElement, LastChanceFontPointSize, vertical);
+                //}
 
                 // RELATIVE SIZE
                 i = cssUnits.IndexOf("EM", StringComparison.OrdinalIgnoreCase);

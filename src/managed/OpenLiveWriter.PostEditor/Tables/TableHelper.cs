@@ -258,6 +258,11 @@ namespace OpenLiveWriter.PostEditor.Tables
             }
         }
 
+        public static bool GetIsHeaderCell(IHTMLElement tableElement)
+        {
+            return tableElement.tagName.Equals("TH", StringComparison.CurrentCultureIgnoreCase);
+        }
+
         public static void UpdateDesignTimeBorders(IHTMLTable table)
         {
             // update the table's borders

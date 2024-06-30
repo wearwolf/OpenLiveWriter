@@ -142,7 +142,6 @@ namespace OpenLiveWriter.PostEditor.PostHtmlEditing
                     }
                 }
 
-
                 return templateHtml;
             }
             else

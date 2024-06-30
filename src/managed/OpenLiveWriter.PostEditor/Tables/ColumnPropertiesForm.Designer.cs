@@ -54,7 +54,7 @@ namespace OpenLiveWriter.PostEditor.Tables
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.buttonCancel.Location = new System.Drawing.Point(379, 201);
+            this.buttonCancel.Location = new System.Drawing.Point(228, 257);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(105, 33);
             this.buttonCancel.TabIndex = 3;
@@ -66,7 +66,7 @@ namespace OpenLiveWriter.PostEditor.Tables
             this.groupBoxSize.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.groupBoxSize.Location = new System.Drawing.Point(13, 11);
             this.groupBoxSize.Name = "groupBoxSize";
-            this.groupBoxSize.Size = new System.Drawing.Size(341, 79);
+            this.groupBoxSize.Size = new System.Drawing.Size(323, 79);
             this.groupBoxSize.TabIndex = 0;
             this.groupBoxSize.TabStop = false;
             this.groupBoxSize.Text = "Size";
@@ -89,7 +89,7 @@ namespace OpenLiveWriter.PostEditor.Tables
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.buttonOK.Location = new System.Drawing.Point(262, 201);
+            this.buttonOK.Location = new System.Drawing.Point(111, 257);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(105, 33);
             this.buttonOK.TabIndex = 2;
@@ -100,23 +100,24 @@ namespace OpenLiveWriter.PostEditor.Tables
             // 
             cellProperties1.BackgroundColor = null;
             cellProperties1.HorizontalAlignment = OpenLiveWriter.PostEditor.Tables.HorizontalAlignment.Left;
+            cellProperties1.IsHeader = false;
             cellProperties1.VerticalAlignment = OpenLiveWriter.PostEditor.Tables.VerticalAlignment.Middle;
             this.cellPropertiesControl.CellProperties = cellProperties1;
             this.cellPropertiesControl.Location = new System.Drawing.Point(13, 113);
             this.cellPropertiesControl.Name = "cellPropertiesControl";
-            this.cellPropertiesControl.Size = new System.Drawing.Size(243, 120);
+            this.cellPropertiesControl.Size = new System.Drawing.Size(323, 143);
             this.cellPropertiesControl.TabIndex = 1;
             // 
             // ColumnPropertiesForm
             // 
             this.AcceptButton = this.buttonOK;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(496, 245);
+            this.ClientSize = new System.Drawing.Size(345, 301);
             this.Controls.Add(this.cellPropertiesControl);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.groupBoxSize);
             this.Controls.Add(this.buttonCancel);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ColumnPropertiesForm";

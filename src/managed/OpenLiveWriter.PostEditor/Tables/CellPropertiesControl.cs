@@ -9,6 +9,7 @@ using System.Data;
 using System.Windows.Forms;
 using OpenLiveWriter.CoreServices.Layout;
 using OpenLiveWriter.Localization;
+using OpenLiveWriter.CoreServices;
 
 namespace OpenLiveWriter.PostEditor.Tables
 {
@@ -33,6 +34,7 @@ namespace OpenLiveWriter.PostEditor.Tables
                     TableAlignmentControl.AdjustSizes(verticalAlignmentControl, horizontalAlignmentControl);
                     verticalAlignmentControl.NaturalizeHeight();
                     horizontalAlignmentControl.NaturalizeHeight();
+                    DisplayHelper.AutoFitSystemCheckBox(checkBoxIsHeader, 0, int.MaxValue);
                 }
             }
 
@@ -58,6 +60,7 @@ namespace OpenLiveWriter.PostEditor.Tables
                 cellProperties.BackgroundColor = _cellColor;
                 cellProperties.HorizontalAlignment = horizontalAlignmentControl.HorizontalAlignment;
                 cellProperties.VerticalAlignment = verticalAlignmentControl.VerticalAlignment;
+                cellProperties.IsHeader = CheckStateToNullableBool(checkBoxIsHeader.CheckState);
                 return cellProperties;
             }
             set
@@ -71,8 +74,49 @@ namespace OpenLiveWriter.PostEditor.Tables
                 _cellColor = cellProperties.BackgroundColor;
                 horizontalAlignmentControl.HorizontalAlignment = cellProperties.HorizontalAlignment;
                 verticalAlignmentControl.VerticalAlignment = cellProperties.VerticalAlignment;
+                checkBoxIsHeader.CheckState = NullableBoolToCheckState(cellProperties.IsHeader);
             }
         }
+
+        public bool IsHeaderCheckBoxThreeState
+        {
+            get
+            {
+                return checkBoxIsHeader.ThreeState;
+            }
+            set
+            {
+                checkBoxIsHeader.ThreeState = value;
+            }
+        }
+
+        private CheckState NullableBoolToCheckState(bool? value)
+        {
+            if(!value.HasValue)
+            {
+                return CheckState.Indeterminate;
+            }
+            else if(value.Value)
+            {
+                return CheckState.Checked;
+            }
+
+            return CheckState.Unchecked;
+        }
+
+        private bool? CheckStateToNullableBool(CheckState checkState)
+        {
+            switch(checkState)
+            {
+                case CheckState.Checked:
+                    return true;
+                case CheckState.Unchecked:
+                    return false;
+            }
+
+            return null;
+        }
+
         // NOTE: right now we don't support editing of cell color so we just have a member
         // variable that tracks the value which was set -- we simply return this same
         // value when the caller does a get
