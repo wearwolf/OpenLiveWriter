@@ -27,7 +27,7 @@ namespace OpenLiveWriter.CoreServices
 
         private const string DefaultProductName = "Open Live Writer";
         private const string AppDataFolderName = "OpenLiveWriter";              // Squirrel installs the app to the folder that matches nuspec's ID.
-        private const string DefaultSettingsRootKeyName = @"Software\\OpenLiveWriter";
+        private const string DefaultSettingsRootKeyName = @"Software\OpenLiveWriter";
 
         public static void Initialize()
         {
