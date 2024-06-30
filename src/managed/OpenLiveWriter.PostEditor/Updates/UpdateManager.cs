@@ -22,13 +22,13 @@ namespace OpenLiveWriter.PostEditor.Updates
         {
 #if !DesktopUWP
             // Update using Squirrel if not a Desktop UWP package
-            var checkNow = forceCheck || UpdateSettings.AutoUpdate;
-            var downloadUrl = UpdateSettings.CheckForBetaUpdates ?
-                UpdateSettings.BetaUpdateDownloadUrl : UpdateSettings.UpdateDownloadUrl;
+            //var checkNow = forceCheck || UpdateSettings.AutoUpdate;
+            //var downloadUrl = UpdateSettings.CheckForBetaUpdates ?
+            //    UpdateSettings.BetaUpdateDownloadUrl : UpdateSettings.UpdateDownloadUrl;
 
             // Schedule Open Live Writer 10 seconds after the launch
-            var delayUpdate = new DelayUpdateHelper(UpdateOpenLiveWriter(downloadUrl, checkNow), UPDATELAUNCHDELAY);
-            delayUpdate.StartBackgroundUpdate("Background OpenLiveWriter application update");
+            //var delayUpdate = new DelayUpdateHelper(UpdateOpenLiveWriter(downloadUrl, checkNow), UPDATELAUNCHDELAY);
+            //delayUpdate.StartBackgroundUpdate("Background OpenLiveWriter application update");
 #endif
         }
 
